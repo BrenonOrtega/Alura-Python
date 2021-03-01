@@ -74,6 +74,39 @@ Passat      62000.0     1999.0  3100.0
 
 ## Tipos de dados no pandas
 
+### Criando Dataframes
+
+Ao importarmos um arquivo com a função pd.read_csv(), também podemos passar um parâmetro "index_col = 0", definindo a coluna que desejamos assumir como índice do dataframe.
+
+```python
+dataset = pd.read_csv('db.csv', sep = ';', index_col = 0)
+```
+
+caso estejamos criando um dataframe com dados próprios, podemos definir qual será o index através da função ".set_index()"
+
+```python
+data = {
+    "cor": ["azul", "laranja", "preto"],
+    "preço": [5000, 15000, 15000],
+    "carro": ['escort', 'civic', 'ka'],
+    "ano de fabricação": [1998, 2005, 2008]
+}
+
+df = pd.DataFrame(data=data)
+df = df.set_index("carro")
+
+'''
+Output:
+
+        cor     preço   ano de fabricação
+carro       
+escort  azul    5000    1998
+civic   laranja 15000   2005
+ka      preto   15000   2008
+
+'''
+```
+
 ### pandas.DataFrame.head()
 
 A função .head() do pandas serve para mostrar oss cinco primeiros registros do nosso conjunto de dados, dando uma "amostra" do que é o nosso dataset.
@@ -212,3 +245,5 @@ Aston Martin DB5        Motor Diesel            122110.90   7685.0
 Macan                   Motor Diesel V6         90381.47    50188.0
 '''
 ```
+
+
