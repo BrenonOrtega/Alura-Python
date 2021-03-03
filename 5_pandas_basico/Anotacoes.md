@@ -247,3 +247,244 @@ Macan                   Motor Diesel V6         90381.47    50188.0
 ```
 
 
+# Material de Consulta
+
+## Links Úteis
+
+[Python string.replace regular expression [duplicate]](https://stackoverflow.com/questions/16720541/python-string-replace-regular-expression)
+
+[Python Docs - re — Operações com expressões regulares](https://docs.python.org/pt-br/3/library/re.html#module-contents)
+
+[Replace strings in Python (replace, translate, re.sub, re.subn)](https://note.nkmk.me/en/python-str-replace-translate-re-sub/)
+
+[Regular Expressions: Regexes in Python (Part 1)](https://realpython.com/regex-python/#metacharacters-supported-by-the-re-module)
+
+[apply() - applying functions to list items](https://chrisalbon.com/python/basics/applying_functions_to_list_items/)
+
+[Python Pandas .ix()](https://www.geeksforgeeks.org/python-pandas-dataframe-ix/)
+
+[Multiindex columns Pandas](https://stackoverflow.com/questions/27420263/pandas-parse-merged-header-columns-from-excel)
+
+[Hierarchical multindex - pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-hierarchical)
+
+[cookbook multiindex - pandas ](https://pandas.pydata.org/pandas-docs/stable/user_guide/cookbook.html#cookbook-multi-index)
+
+[Built-in functions python](https://docs.python.org/3.6/library/functions.html)
+
+[XlsxWriter](https://xlsxwriter.readthedocs.io/index.html)
+
+[Multiple Pandas dataframes to Excel](https://xlsxwriter.readthedocs.io/example_pandas_multiple.html#ex-pandas-multiple)
+
+[]()
+
+
+## [4.1 Python Built-in functions](https://docs.python.org/3.6/library/functions.html)
+A linguagem Python possui várias funções integradas que estão sempre acessíveis. Algumas já utilizamos em nosso treinamento: type(), print(), zip(), len(), set() etc.
+
+Utilizando a função pd.set_option() é possível definir alguns parâmetros do dataframe, como o número máximo de linhas retornadas, algo que configuraremos com display.max_rows seguido do número determinado de linhas, neste exemplo 1000.
+
+```python
+import pandas as pd
+pd.set_option('display.max_rows', 1000)
+```
+
+Se executarmos dataset novamente, receberemos todas as 258 linhas - não foram mostradas 1000 pois nosso conjunto não possui esse total de informações. Também temos uma opção para exibir mais colunas, chamada display.max_columns. Como gostaríamos de manter a configuração padrão, comentaremos ambas as linhas.
+
+```python
+import pandas as pd
+# pd.set_option('display.max_rows', 10000)
+ #pd.set_option('display.max_columns', 1000)
+```
+
+
+## 5. PANDAS BÁSICO
+versão: 0.25.2
+
+Pandas é uma ferramenta de manipulação de dados de alto nível, construída com base no pacote Numpy. O pacote pandas possui estruturas de dados bastante interessantes para manipulação de dados e por isso é muito utilizado por cientistas de dados.
+
+## Estruturas de Dados
+### Series
+Series são arrays unidimensionais rotulados capazes de armazenar qualquer tipo de dado. Os rótulos das linhas são chamados de index. A forma básica de criação de uma Series é a seguinte:
+
+`````python
+s = pd.Series(dados, index = index)
+````
+
+O argumento dados pode ser um dicionário, uma lista, um array Numpy ou uma constante.
+
+### DataFrames
+DataFrame é uma estrutura de dados tabular bidimensional com rótulos nas linha e colunas. Como a Series, os DataFrames são capazes de armazenar qualquer tipo de dados.
+
+```python
+    df = pd.DataFrame(dados, index = index, columns = columns)
+```
+
+O argumento dados pode ser um dicionário, uma lista, um array Numpy, uma Series e outro DataFrame.
+
+[Documentação](https://pandas.pydata.org/pandas-docs/version/0.25/)
+
+
+## A função zip()
+
+Duas ferramentas bastante utilizadas quando iteramos com tuplas são o desempacotamento de tuplas e a built-in function zip().
+
+Com o desempacotamento de tuplas, é possível fazer declarações conjuntas de variáveis e utilizar cada variável individualmente. Por exemplo:
+
+```python
+nome, valor = ('Passat', 100000.0)
+```
+
+A função zip() permite gerar um iterador de tuplas, como no exemplo abaixo:
+
+````python
+In [1]:
+nomes = ['Passat', 'Crossfox']
+valores = [100000.0, 75000.0]
+list(zip(nomes, valores))
+
+Out [1]:
+[('Passat', 100000.0), ('Crossfox', 75000.0)]
+```
+
+
+## Operações básicas com dicionários
+
+```python
+dados = {
+    'Passat': {
+        'ano': 2012,
+        'km': 50000,
+        'valor': 75000,
+        'acessorios': ['Airbag', 'ABS']
+        }, 
+    'Crossfox': {
+        'ano': 2015,
+        'km': 35000,
+        'valor': 25000
+        }
+    }
+```
+
+```python
+ 
+nomes_carros = ['Jetta Variant', 'Passat', ('ecosport', 'ka', 'fiesta'), 'Polo']
+nomes_carros = tuple(carros)
+jetta, passat, ford, polo = nomes_carros
+print(jetta, passat, ford, polo)
+
+nomes_carros[2][1]
+
+######################################################
+
+nomes_carros = ['Jetta Variant', 'Passat', ('ecosport', 'ka', 'fiesta'), 'Polo']
+nomes_carros = tuple(carros)
+
+_, a, *_ = nomes_carros
+
+print(a, _)
+
+
+##############################################################
+import re
+marcas = ['porsche', 'lamborghini', 'audi', 'bmw', 'mercedes', 'jaguar']
+modelos=['cayenne','murcielago','A6','325i','sl300','????']
+
+a = zip(marcas,modelos)
+
+for marca, modelo in zip(marcas, modelos): 
+    if re.search('[rs]$', marca):
+        print('marca: {} - modelo: {}'.format(marca, modelo))
+
+#######################################################################
+```
+
+## formando dicts a partir de um iterador (.zip())
+""" uma variavel que recebe um dict não copia os dados de um dict, simplesmente aponta para o mesmo endereço de memória, portanto para manipular um dict sem interferir no original é necessário usar o método dict.copy() : """
+
+carros = dict((marca, modelo) for marca, modelo in zip (marcas, modelos))
+outro_carros = carros
+carros_copia = carros.copy()
+modelo = carros.pop('jaguar')
+
+'''o carros_copia que recebeu realmente uma cópia do dict não teve seu item "Jaguar"
+apagado após o comando, mas o carros e outro_carros tiveram assim que o comando 
+"carros.pop('jaguar') foi executado, o comando .pop(key, default) além de ter a possibilidade de tratamento de erro caso não seja encontrado a key passada pelo parametro "default" e a cada pop, o valor referenciado no item é retornado, portanto podemos salva-lo numa variável.'''
+
+print(carros_copia, '\n', carros, '\n', outro_carros)
+
+O método update() atualiza o dicionário e pode ser utilizado de duas formas:
+
+```python
+
+In [1]:
+dados.update({'Passat': 85000, 'Fusca': 150000})
+
+Out [1]:
+{'Jetta': 88000, 'Crossfox': 72000, 'DS5': 124000, 'Passat': 85000, 'Fusca': 150000}
+
+In [2]:
+dados.update(Passat = 95000, Fusca = 160000)
+
+Out [2]:
+{'Jetta': 88000, 'Crossfox': 72000, 'DS5': 124000, 'Passat': 95000, 'Fusca': 160000}
+
+```
+
+Alternativa correta! Note que se a chave tiver um nome não válido para variáveis do Python (por exemplo: 'Jetta Variant'), o segundo formato não pode ser utilizado.
+
+O método copy() cria uma cópia do dicionário
+Alternativa correta! Funciona da mesma forma que aprendemos no curso anterior, quando falamos sobre as listas do Python.
+
+## Métodos de dicionários:
+
+Alguns exemplos:
+
+```python
+carros = dict((marca, modelo) for marca, modelo in zip (marcas, modelos))
+
+carros.keys(), carros.values(), carros.items()
+
+OUTPUT:
+
+dict_keys(['porsche', 'lamborghini', 'audi', 'bmw', 'mercedes', 'jaguar']) 
+dict_values(['cayenne', 'murcielago', 'A6', '325i', 'sl300', '????']) 
+dict_items([('porsche', 'cayenne'), ('lamborghini', 'murcielago'), ('audi', 'A6'), ('bmw', '325i'), ('mercedes', 'sl300'), ('jaguar', '????')])
+```
+
+
+Utilize o dicionário abaixo para responder esta atividade:
+```python
+dados = {
+    'Crossfox': {'valor': 72000, 'ano': 2005}, 
+    'DS5': {'valor': 125000, 'ano': 2015}, 
+    'Fusca': {'valor': 150000, 'ano': 1976}, 
+    'Jetta': {'valor': 88000, 'ano': 2010}, 
+    'Passat': {'valor': 106000, 'ano': 1998}
+}
+```
+Selecione a alternativa que apresenta o código que imprime somente os nomes dos veículos com ano de fabricação maior ou igual a 2000.
+
+```python
+for item in dados.items():
+    if(item[1]['ano'] >= 2000):
+        print(item[0])
+```
+Alternativa correta! Veja que dados.items() retorna um iterador de tuplas, onde cada tupla tem como primeiro item a chave do dicionário e como segundo o respectivo valor:
+
+In [1]:
+
+```python
+for item in dados.items():
+    print(item)
+```
+
+```python
+('Crossfox', {'valor': 72000, 'ano': 2005})
+('DS5', {'valor': 125000, 'ano': 2015})
+('Fusca', {'valor': 150000, 'ano': 1976})
+('Jetta', {'valor': 88000, 'ano': 2010})
+('Passat', {'valor': 106000, 'ano': 1998})
+```
+
+Para acessar a chave do dicionário, basta utilizar item[0], e para acessar o valor, basta usar item[1]. Para acessar o ano dentro do dicionário, usamos item[1]['ano'].
+
