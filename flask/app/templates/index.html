@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="pt-br"> 
+    <head>
+        <meta charset="utf-8/">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+ 
+        <title>Select a Pokemon</title>
+        
+        
+
+    </head>
+    <body background={{ url_for('static', filename='bg_image.jpg') }}> 
+        {% block content %}
+            <h1> Pokemon Profile </h1>
+            <h2>ID: {{data.id}} - Nome: {{data.name|capitalize}}</h2>
+            <div>
+                <h3>Habilidades</h3>
+                <ul>
+                    {% for item in data.abilities %}
+                        <li>
+                            Nome: {{item.ability.name|title}} 
+                            {{"(Hidden)" if item.ability.is_hidden else ""}}
+                        </li>
+                    {% endfor %}
+                
+                </ul>
+            </div>
+            <img src={{sprite_url}} alt={{data.name}}/></img>
+       {% endblock %}
+    </body>
+ 
+<html/> 

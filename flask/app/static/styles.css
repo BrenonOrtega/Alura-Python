@@ -1,0 +1,23 @@
+body {
+    background-size: cover;
+    background-color: lightblue;
+    color:lightblue;
+    text-align:left;
+    padding:3px;
+    -webkit-text-stroke-width: 0.4px;
+    -webkit-text-stroke-color: darkblue;   
+
+}
+
+img {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 0px;
+    width: 250px; 
+    height:250px;
+}
+
+li {
+    font-size: 20px;
+    font-weight: normal;
+}
