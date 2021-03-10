@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8/">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
  
         <title>Select a Pokemon</title>
         
@@ -24,10 +24,11 @@
                             {{"(Hidden)" if item.ability.is_hidden else ""}}
                         </li>
                     {% endfor %}
-                
                 </ul>
             </div>
-            <img src={{sprite_url}} alt={{data.name}}/></img>
+            <div><img src={{sprite_url}} alt={{data.name}}/></img></div>
+            
+            {# <input onclick=''><button>Buscar</button></input> #}
        {% endblock %}
     </body>
  
