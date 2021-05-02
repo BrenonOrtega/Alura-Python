@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+
+  {% block content %}
+    <form action="/criar" method="POST">
+      <fieldset>
+        <div class="form-group">
+          <label for="Nome">Nome do Jogo</label>
+          <input type="text" name="nome" id="nome" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="ano">
+          <label for="Console">Ano do Jogo</label>
+        <input type="text" name="ano" id="ano" class="form-control"/>                
+        </div>
+          <div class="form-group">Console</label>
+          <input type="text" name="console" id="console" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar jogo!</button>
+      </fieldset>
+    </form>
+  {% endblock %}

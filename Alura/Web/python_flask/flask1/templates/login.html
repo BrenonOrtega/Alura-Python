@@ -1,0 +1,17 @@
+
+{% extends  'template.html' %}
+
+    {% block content %}
+        <form action="/autenticar", method="post" class="form-control">
+            <div>
+                <label for="usuario">Nome do usuário</label/>
+                <Input type="text" name="input-usuario" id="input-usuario" class="form-group"/>
+            </div>
+            <div>
+                <label for="senha">Senha</label/>
+                <Input type="password" name="input-senha" id="input-senha" class="form-group"/>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-submit">Logar</button>
+        </form>
+
+    {% endblock %}
